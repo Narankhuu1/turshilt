@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="STREET STYLE - Монголын хамгийн шинэлэг стритвэр брэнд. Өвөрмөц дизайн, чанартай материал.">
+    <meta name="theme-color" content="#111111">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="STREET STYLE | Монгол Стритвэр">
+    <meta property="og:description" content="Өвөрмөц стритвэр хувцас. Чанартай материал, шинэлэг дизайн.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="mn_MN">
+    
+    <title>STREET STYLE | Монгол Стритвэр Брэнд</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Dynamic Island-style header -->
+    <header class="site-header" role="banner">
+        <div class="header-content">
+            <div class="logo">
+                <h1>STREET STYLE</h1>
+            </div>
+            <nav class="main-nav" aria-label="Үндсэн навигаци">
+                <ul>
+                    <li><a href="#products" aria-label="Бүтээгдэхүүн хэсэгт шилжих">Бүтээгдэхүүн</a></li>
+                    <li><a href="#about" aria-label="Бидний тухай хэсэгт шилжих">Бидний тухай</a></li>
+                    <li><a href="#contact" aria-label="Холбоо барих хэсэгт шилжих">Холбоо</a></li>
+                </ul>
+            </nav>
+            <button class="cart-toggle" aria-label="Сагс руу шилжих">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main role="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h2 id="hero-title">ШИНЭ ЦУГЛУУЛГА 2026</h2>
+                <p class="hero-subtitle">Монголын залуусын хэв маяг</p>
+                <a href="#products" class="cta-button">Харах</a>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products-section" aria-labelledby="products-title">
+            <div class="container">
+                <h2 id="products-title" class="section-title">ШИНЭ БҮТЭЭГДЭХҮҮНҮҮД</h2>
+                
+                <div class="products-grid">
+                    <!-- Product Card 1 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=800&fit=crop" 
+                                alt="Хар өнгийн оверсайз футболька"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Оверсайз Футболка</h3>
+                            <p class="product-price">₮45,000</p>
+                            <a href="#" class="product-link" aria-label="Оверсайз Футболка дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 2 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&h=800&fit=crop" 
+                                alt="Саарал өнгийн график худі"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">График Худі</h3>
+                            <p class="product-price">₮89,000</p>
+                            <a href="#" class="product-link" aria-label="График Худі дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=600&h=800&fit=crop" 
+                                alt="Хар өнгийн карго өмд"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Карго Өмд</h3>
+                            <p class="product-price">₮75,000</p>
+                            <a href="#" class="product-link" aria-label="Карго Өмд дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 4 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop" 
+                                alt="Цагаан өнгийн минимал цамц"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Минимал Цамц</h3>
+                            <p class="product-price">₮52,000</p>
+                            <a href="#" class="product-link" aria-label="Минимал Цамц дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 5 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=800&fit=crop" 
+                                alt="Хар өнгийн бомбер цуурга"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Бомбер Цуурга</h3>
+                            <p class="product-price">₮125,000</p>
+                            <a href="#" class="product-link" aria-label="Бомбер Цуурга дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 6 -->
+                    <article class="product-card" data-scroll>
+                        <div class="product-image-wrapper">
+                            <img 
+                                src="https://images.unsplash.com/photo-1603252109303-2751440ee43d?w=600&h=800&fit=crop" 
+                                alt="Саарал өнгийн спорт жийнс"
+                                loading="lazy"
+                                width="600"
+                                height="800"
+                            >
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Спорт Жийнс</h3>
+                            <p class="product-price">₮68,000</p>
+                            <a href="#" class="product-link" aria-label="Спорт Жийнс дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section" aria-labelledby="about-title">
+            <div class="container">
+                <h2 id="about-title" class="section-title">БИДНИЙ ТУХАЙ</h2>
+                <div class="about-content">
+                    <p>STREET STYLE бол Монголын залуусын хэв маягийг илэрхийлэх шинэлэг брэнд юм. Бид чанартай материал, өвөрмөц дизайн, хамгийн сүүлийн үеийн трендийг нэгтгэсэн бүтээгдэхүүнүүдийг санал болгодог.</p>
+                    <p>Манай баг уран бүтээлчид, дизайнерууд хамтран ажиллаж, таны хувцаслалтад онцгой мэдрэмжийг авчирна.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 id="contact-title" class="section-title">ХОЛБОО БАРИХ</h2>
+                <div class="contact-content">
+                    <p>Улаанбаатар хот, Сүхбаатар дүүрэг</p>
+                    <p>Утас: +976 9999-9999</p>
+                    <p>Имэйл: info@streetstyle.mn</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook хуудас руу шилжих">Facebook</a>
+                        <a href="#" aria-label="Instagram хуудас руу шилжих">Instagram</a>
+                        <a href="#" aria-label="TikTok хуудас руу шилжих">TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 STREET STYLE. Бүх эрх хуулиар хамгаалагдсан.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
