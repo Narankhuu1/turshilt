@@ -3,211 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="STREET STYLE - Монголын хамгийн шинэлэг стритвэр брэнд. Өвөрмөц дизайн, чанартай материал.">
-    <meta name="theme-color" content="#111111">
+    <meta name="description" content="Монголын орчин үеийн стритвир брэнд. Шинэ цуглуулга.">
+    <title>URBAN MN | Стритвир Хувцас</title>
     
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="STREET STYLE | Монгол Стритвэр">
-    <meta property="og:description" content="Өвөрмөц стритвэр хувцас. Чанартай материал, шинэлэг дизайн.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="mn_MN">
-    
-    <title>STREET STYLE | Монгол Стритвэр Брэнд</title>
-    
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Preload critical fonts -->
+    <!-- Google Fonts: Inter for clean geometry -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #F8F9FA;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #E63946; /* Bold Red Accent */
+            --card-bg: #FFFFFF;
+            --spacing-unit: 1rem;
+            --container-width: 1440px;
+            --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(248, 249, 250, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .cart-icon {
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--transition-smooth) forwards 0.2s;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--transition-smooth) forwards 0.4s;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PRODUCT GRID --- */
+        .products-section {
+            padding: 4rem 0 8rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- PRODUCT CARD --- */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
+            
+            /* Animation Initial State */
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            will-change: opacity, transform;
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s var(--transition-smooth);
+            loading: lazy;
+        }
+
+        .product-card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .product-price {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+
+        .btn-details {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .btn-details {
+            color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #fff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        /* --- ACCESSIBILITY & MOTION --- */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .product-card {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 1.5rem;
+            }
+            .hero {
+                height: 60vh;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Dynamic Island-style header -->
-    <header class="site-header" role="banner">
-        <div class="header-content">
-            <div class="logo">
-                <h1>STREET STYLE</h1>
-            </div>
-            <nav class="main-nav" aria-label="Үндсэн навигаци">
-                <ul>
-                    <li><a href="#products" aria-label="Бүтээгдэхүүн хэсэгт шилжих">Бүтээгдэхүүн</a></li>
-                    <li><a href="#about" aria-label="Бидний тухай хэсэгт шилжих">Бидний тухай</a></li>
-                    <li><a href="#contact" aria-label="Холбоо барих хэсэгт шилжих">Холбоо</a></li>
-                </ul>
-            </nav>
-            <button class="cart-toggle" aria-label="Сагс руу шилжих">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-            </button>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">URBAN MN</a>
+            <div class="cart-icon">САГТАЙ (0)</div>
         </div>
     </header>
 
-    <main role="main">
+    <main>
         <!-- Hero Section -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <h2 id="hero-title">ШИНЭ ЦУГЛУУЛГА 2026</h2>
-                <p class="hero-subtitle">Монголын залуусын хэв маяг</p>
-                <a href="#products" class="cta-button">Харах</a>
+        <section class="hero">
+            <div class="container">
+                <h1>ШИНЭ ЦУГЛУУЛГА<br>2026</h1>
+                <p>Минималист дизайн. Чанартай материал. Улаанбаатарын гудамжинд зориулав.</p>
             </div>
-            <div class="hero-overlay"></div>
         </section>
 
         <!-- Products Section -->
-        <section id="products" class="products-section" aria-labelledby="products-title">
+        <section class="products-section">
             <div class="container">
-                <h2 id="products-title" class="section-title">ШИНЭ БҮТЭЭГДЭХҮҮНҮҮД</h2>
+                <h2 class="section-title">Бүтээгдэхүүнүүд</h2>
                 
-                <div class="products-grid">
-                    <!-- Product Card 1 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=800&fit=crop" 
-                                alt="Хар өнгийн оверсайз футболька"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                <div class="grid" id="product-grid">
+                    <!-- Product 1 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Оверсайз Футболка" loading="lazy">
                         </div>
-                        <div class="product-info">
+                        <div class="card-info">
                             <h3 class="product-title">Оверсайз Футболка</h3>
                             <p class="product-price">₮45,000</p>
-                            <a href="#" class="product-link" aria-label="Оверсайз Футболка дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
 
-                    <!-- Product Card 2 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&h=800&fit=crop" 
-                                alt="Саарал өнгийн график худі"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                    <!-- Product 2 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=600&q=80" alt="Хар Хүрэм" loading="lazy">
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">График Худі</h3>
-                            <p class="product-price">₮89,000</p>
-                            <a href="#" class="product-link" aria-label="График Худі дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        <div class="card-info">
+                            <h3 class="product-title">Хар Хүрэм</h3>
+                            <p class="product-price">₮120,000</p>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
 
-                    <!-- Product Card 3 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=600&h=800&fit=crop" 
-                                alt="Хар өнгийн карго өмд"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                    <!-- Product 3 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551488852-d81a2d5b0d72?auto=format&fit=crop&w=600&q=80" alt="Карго Өмд" loading="lazy">
                         </div>
-                        <div class="product-info">
+                        <div class="card-info">
                             <h3 class="product-title">Карго Өмд</h3>
-                            <p class="product-price">₮75,000</p>
-                            <a href="#" class="product-link" aria-label="Карго Өмд дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                            <p class="product-price">₮85,000</p>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
 
-                    <!-- Product Card 4 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop" 
-                                alt="Цагаан өнгийн минимал цамц"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                    <!-- Product 4 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?auto=format&fit=crop&w=600&q=80" alt="График Худи" loading="lazy">
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Минимал Цамц</h3>
-                            <p class="product-price">₮52,000</p>
-                            <a href="#" class="product-link" aria-label="Минимал Цамц дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        <div class="card-info">
+                            <h3 class="product-title">График Худи</h3>
+                            <p class="product-price">₮95,000</p>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
 
-                    <!-- Product Card 5 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=800&fit=crop" 
-                                alt="Хар өнгийн бомбер цуурга"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                    <!-- Product 5 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?auto=format&fit=crop&w=600&q=80" alt="Спортик Цамц" loading="lazy">
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Бомбер Цуурга</h3>
-                            <p class="product-price">₮125,000</p>
-                            <a href="#" class="product-link" aria-label="Бомбер Цуурга дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        <div class="card-info">
+                            <h3 class="product-title">Спортик Цамц</h3>
+                            <p class="product-price">₮55,000</p>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
 
-                    <!-- Product Card 6 -->
-                    <article class="product-card" data-scroll>
-                        <div class="product-image-wrapper">
-                            <img 
-                                src="https://images.unsplash.com/photo-1603252109303-2751440ee43d?w=600&h=800&fit=crop" 
-                                alt="Саарал өнгийн спорт жийнс"
-                                loading="lazy"
-                                width="600"
-                                height="800"
-                            >
+                    <!-- Product 6 -->
+                    <article class="product-card">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Улаан Теннис" loading="lazy">
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Спорт Жийнс</h3>
-                            <p class="product-price">₮68,000</p>
-                            <a href="#" class="product-link" aria-label="Спорт Жийнс дэлгэрэнгүй">Дэлгэрэнгүй</a>
+                        <div class="card-info">
+                            <h3 class="product-title">Улаан Теннис</h3>
+                            <p class="product-price">₮150,000</p>
+                            <span class="btn-details">Дэлгэрэнгүй</span>
                         </div>
                     </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about-section" aria-labelledby="about-title">
-            <div class="container">
-                <h2 id="about-title" class="section-title">БИДНИЙ ТУХАЙ</h2>
-                <div class="about-content">
-                    <p>STREET STYLE бол Монголын залуусын хэв маягийг илэрхийлэх шинэлэг брэнд юм. Бид чанартай материал, өвөрмөц дизайн, хамгийн сүүлийн үеийн трендийг нэгтгэсэн бүтээгдэхүүнүүдийг санал болгодог.</p>
-                    <p>Манай баг уран бүтээлчид, дизайнерууд хамтран ажиллаж, таны хувцаслалтад онцгой мэдрэмжийг авчирна.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section" aria-labelledby="contact-title">
-            <div class="container">
-                <h2 id="contact-title" class="section-title">ХОЛБОО БАРИХ</h2>
-                <div class="contact-content">
-                    <p>Улаанбаатар хот, Сүхбаатар дүүрэг</p>
-                    <p>Утас: +976 9999-9999</p>
-                    <p>Имэйл: info@streetstyle.mn</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook хуудас руу шилжих">Facebook</a>
-                        <a href="#" aria-label="Instagram хуудас руу шилжих">Instagram</a>
-                        <a href="#" aria-label="TikTok хуудас руу шилжих">TikTok</a>
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer" role="contentinfo">
+    <!-- Footer -->
+    <footer>
         <div class="container">
-            <p>&copy; 2026 STREET STYLE. Бүх эрх хуулиар хамгаалагдсан.</p>
+            <div class="logo">URBAN MN</div>
+            <p class="footer-text">© 2026 Брэндийн нэр. Бүх эрх хуулиар хамгаалагдсан.</p>
+            <p class="footer-text">Улаанбаатар, Монгол</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Scroll Depth Animation Setup
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px 0px -100px 0px', // trigger slightly before element enters fully
+                threshold: 0.1 // trigger when 10% visible
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add staggered delay based on index within the visible batch
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100); // 100ms delay between cards
+                        
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            
+            // Target all product cards
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => observer.observe(card));
+
+            // 2. Simple Cart Interaction (Visual Only)
+            const cartBtn = document.querySelector('.cart-icon');
+            let cartCount = 0;
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Simulate adding to cart
+                    cartCount++;
+                    cartBtn.textContent = `САГТАЙ (${cartCount})`;
+                    
+                    // Visual feedback
+                    const originalText = card.querySelector('.btn-details').textContent;
+                    const btn = card.querySelector('.btn-details');
+                    btn.textContent = "Нэмсэн ✓";
+                    btn.style.color = "var(--accent)";
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.color = "";
+                    }, 1500);
+                });
+            });
+
+            console.log("URBAN MN Store loaded successfully.");
+        });
+    </script>
 </body>
 </html>
