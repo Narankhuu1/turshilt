@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URBAN FLOW | Premium Streetwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #ff6b00;
+    --primary-dark: #cc5500;
+    --primary-light: #ff8c33;
+    --black: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --mid-gray: #2a2a2a;
+    --light-gray: #888888;
+    --white: #ffffff;
+    --accent-blue: #00d4ff;
+    --card-bg: rgba(255,255,255,0.03);
+    --glass: rgba(255,255,255,0.05);
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all 0.18s ease;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.98), transparent);
+    backdrop-filter: blur(10px);
+  }
+  .logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--primary); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content:''; position: absolute; bottom:-4px; left:0; right:0;
+    height:2px; background: var(--primary);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cart {
+    background: var(--primary);
+    border: none; color: var(--white);
+    padding: 12px 28px; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700;
+    cursor: none; letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,0,0.6);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.7) 50%, rgba(26,26,26,0.8) 100%),
+      url('https://images.unsplash.com/photo-1523396870177-029580ea8670?w=1920&q=80') center/cover no-repeat;
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,107,0,0.15), transparent 50%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 10;
+    padding: 0 60px;
+    max-width: 700px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,107,0,0.15);
+    border: 1px solid rgba(255,107,0,0.4);
+    color: var(--primary);
+    padding: 6px 18px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .hero-title span.primary { 
+    color: var(--primary);
+    display: block;
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    max-width: 480px;
+    animation: fadeUp 0.8s ease 0.6s both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    margin-top: 40px;
+    animation: fadeUp 0.8s ease 0.8s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white); border: none;
+    padding: 18px 42px; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 700;
+    cursor: none; letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 30px rgba(255,107,0,0.4);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content:'';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,107,0,0.6); }
+  .btn-primary:hover::before { opacity: 1; }
+  .btn-secondary {
+    color: var(--white);
+    background: none; border: 2px solid rgba(255,255,255,0.3);
+    padding: 16px 36px; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 700;
+    cursor: none; letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+  .hero-image {
+    position: absolute; right: 5%; top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 450px;
+    height: 600px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    animation: floatImage 6s ease-in-out infinite;
+  }
+  .hero-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  @keyframes floatImage {
+    0%,100% { transform: translateY(-50%) translateY(0); }
+    50% { transform: translateY(-50%) translateY(-20px); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    position: relative; z-index: 20;
+    display: flex; gap: 0;
+    background: var(--dark-gray);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item {
+    flex: 1;
+    padding: 32px 40px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: var(--mid-gray); }
+  .stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .stat-label { 
+    font-size: 0.75rem; 
+    color: rgba(255,255,255,0.5); 
+    margin-top: 8px; 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─── CATEGORIES ─── */
+  section { padding: 100px 60px; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .cat-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: none;
+    height: 320px;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .cat-card:hover { transform: translateY(-12px); }
+  .cat-bg {
+    position: absolute; inset: 0;
+    transition: transform 0.6s ease;
+  }
+  .cat-card:hover .cat-bg { transform: scale(1.1); }
+  .cat-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    transition: opacity 0.3s;
+  }
+  .cat-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 28px;
+    z-index: 2;
+  }
+  .cat-info h3 { 
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px; 
+  }
+  .cat-info p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+  .cat-arrow {
+    position: absolute; top: 20px; right: 20px;
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    z-index: 2;
+    color: var(--white);
+  }
+  .cat-card:hover .cat-arrow { background: var(--primary); transform: rotate(45deg); }
+
+  /* ─── PRODUCTS ─── */
+  .products-section {
+    background: linear-gradient(to bottom, var(--black), var(--dark-gray));
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .prod-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: none;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .prod-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(255,107,0,0.4);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(255,107,0,0.1);
+  }
+  .prod-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(255,107,0,0.08), rgba(255,255,255,0.03));
+    border-color: rgba(255,107,0,0.3);
+  }
+  .prod-img {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    background: var(--mid-gray);
+  }
+  .prod-card.featured .prod-img { height: 340px; }
+  .prod-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .prod-card:hover .prod-img img { transform: scale(1.08); }
+  .prod-badge {
+    position: absolute; top: 16px; left: 16px; z-index: 2;
+    background: var(--primary);
+    color: var(--white); padding: 5px 14px;
+    border-radius: 4px; font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(255,107,0,0.4);
+  }
+  .prod-badge.gold { background: var(--white); color: var(--black); }
+  .prod-body { padding: 24px; }
+  .prod-category {
+    font-size: 0.7rem; color: var(--primary);
+    font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .prod-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px; 
+    line-height: 1.2;
+  }
+  .prod-card.featured .prod-name { font-size: 1.6rem; }
+  .prod-desc {
+    font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    line-height: 1.6; margin-bottom: 20px;
+  }
+  .prod-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .prod-price {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    letter-spacing: 1px;
+  }
+  .prod-price .old-price {
+    font-size: 0.9rem; color: rgba(255,255,255,0.3);
+    text-decoration: line-through; margin-left: 10px;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+  }
+  .add-btn {
+    background: none;
+    border: 2px solid rgba(255,107,0,0.4);
+    color: var(--primary);
+    width: 48px; height: 48px;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    cursor: none;
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 300;
+  }
+  .add-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255,107,0,0.5);
+  }
+
+  /* ─── BANNER ─── */
+  .banner-section {
+    padding: 0 60px 100px;
+  }
+  .banner {
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1a0f05 0%, #0a0a0a 50%, #1a1510 100%);
+    padding: 80px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .banner::before {
+    content:'';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,107,0,0.15), transparent 60%);
+    right: -100px; top: -100px;
+    border-radius: 50%;
+  }
+  .banner-inner { 
+    position: relative; z-index: 1; 
+    max-width: 550px;
+  }
+  .banner-inner .section-tag { text-align: left; }
+  .banner-inner h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin: 16px 0 24px;
+  }
+  .banner-inner p { color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 36px; font-size: 1rem; }
+  .banner-img {
+    position: relative;
+    z-index: 1;
+    width: 350px;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  }
+  .banner-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section {
+    background: linear-gradient(to bottom, var(--dark-gray), var(--black));
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 36px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+  .testi-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,107,0,0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .testi-quote {
+    font-size: 3rem;
+    color: var(--primary);
+    line-height: 0.5;
+    margin-bottom: 16px;
+    font-family: serif;
+    opacity: 0.5;
+  }
+  .testi-text {
+    font-size: 0.95rem; line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .testi-user { display: flex; align-items: center; gap: 16px; }
+  .testi-avatar {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255,107,0,0.3);
+  }
+  .testi-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .testi-name { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+  .testi-loc { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
+  .testi-stars { color: var(--primary); font-size: 0.85rem; float: right; letter-spacing: 2px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 70px 60px;
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+  }
+  .footer-brand .logo { 
+    font-size: 2.2rem; 
+    display: block; 
+    margin-bottom: 20px;
+    font-family: 'Anton', sans-serif;
+  }
+  .footer-brand p { font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 320px; }
+  .footer-col h4 {
+    font-size: 0.75rem; font-weight: 800;
+    letter-spacing: 3px; color: var(--white);
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .footer-col a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.88rem; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--primary); }
+  .footer-bottom {
+    background: var(--black);
+    padding: 28px 60px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: rgba(255,255,255,0.3);
+  }
+  .social-links { display: flex; gap: 14px; }
+  .social-btn {
+    width: 42px; height: 42px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; cursor: none;
+    transition: all 0.3s;
+    color: var(--white);
+  }
+  .social-btn:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media(max-width:1024px) {
+    .hero-image { display: none; }
+    .banner { flex-direction: column; padding: 50px; }
+    .banner-img { width: 100%; max-width: 400px; margin-top: 40px; }
+  }
+
+  @media(max-width:768px) {
+    nav { padding: 18px 24px; }
+    section, .banner-section { padding: 60px 24px; }
+    .hero-content { padding: 0 24px; }
+    .categories-grid, .products-grid, .testi-grid { grid-template-columns: 1fr; }
+    .prod-card.featured { grid-column: 1; }
+    footer { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
+    .footer-bottom { flex-direction: column; gap: 16px; padding: 20px 24px; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="logo">Urban<span>Flow</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#sale">Sale</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <button class="nav-cart">🛒 Cart (3)</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ New Collection 2025</div>
+    <h1 class="hero-title">
+      Street Style
+      <span class="primary">Redefined</span>
+    </h1>
+    <p class="hero-sub">
+      Welcome to Urban Flow — where premium streetwear meets urban culture. Quality pieces designed for those who dare to stand out.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary">✦ Shop Now</button>
+      <button class="btn-secondary">View Lookbook →</button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80" alt="Streetwear Model">
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Products</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">25K+</div>
+    <div class="stat-label">Customers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Satisfaction</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Worldwide</div>
+    <div class="stat-label">Shipping</div>
+  </div>
+</div>
+
+<!-- ─── CATEGORIES ─── -->
+<section class="reveal" id="collections">
+  <div class="section-header">
+    <span class="section-tag">✦ Categories</span>
+    <h2 class="section-title">Find Your <em style="color:var(--primary)">Style</em></h2>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card">
+      <div class="cat-bg">
+        <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=400&q=80" alt="Hoodies">
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <h3>Hoodies & Sweatshirts</h3>
+        <p>120+ Products</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg">
+        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80" alt="T-Shirts">
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <h3>T-Shirts & Tops</h3>
+        <p>180+ Products</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg">
+        <img src="https://images.unsplash.com/photo-1542272617-08f08630329e?w=400&q=80" alt="Pants">
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <h3>Pants & Joggers</h3>
+        <p>95+ Products</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg">
+        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80" alt="Sneakers">
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <h3>Sneakers</h3>
+        <p>85+ Products</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRODUCTS ─── -->
+<section class="products-section reveal" id="shop">
+  <div class="section-header">
+    <span class="section-tag">✦ Featured Drops</span>
+    <h2 class="section-title">Latest <em style="color:var(--primary)">Arrivals</em></h2>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Featured -->
+    <div class="prod-card featured">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=800&q=80" alt="Oversized Hoodie">
+        <div class="prod-badge gold">✦ FEATURED</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-category">Hoodies</div>
+        <div class="prod-name">Oversized Graphic Hoodie</div>
+        <div class="prod-desc">Premium cotton blend with bold graphic print. Perfect for layering or standalone wear.</div>
+        <div class="prod-footer">
+          <div>
+            <div class="prod-price">$89 <span class="old-price">$120</span></div>
+          </div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&q=80" alt="Graphic Tee">
+        <div class="prod-badge">NEW</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-category">T-Shirts</div>
+        <div class="prod-name">Urban Graphic Tee</div>
+        <div class="prod-desc">100% organic cotton with unique street art design.</div>
+        <div class="prod-footer">
+          <div class="prod-price">$45</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80" alt="Cargo Pants">
+      </div>
+      <div class="prod-body">
+        <div class="prod-category">Pants</div>
+        <div class="prod-name">Tech Cargo Pants</div>
+        <div class="prod-desc">Water-resistant fabric with multiple utility pockets.</div>
+        <div class="prod-footer">
+          <div class="prod-price">$95</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&q=80" alt="Sneakers">
+        <div class="prod-badge">-20%</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-category">Footwear</div>
+        <div class="prod-name">High-Top Sneakers</div>
+        <div class="prod-desc">Classic silhouette with modern comfort technology.</div>
+        <div class="prod-footer">
+          <div class="prod-price">$135 <span class="old-price">$169</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="Bomber Jacket">
+      </div>
+      <div class="prod-body">
+        <div class="prod-category">Outerwear</div>
+        <div class="prod-name">MA-1 Bomber Jacket</div>
+        <div class="prod-desc">Lightweight nylon with reversible design option.</div>
+        <div class="prod-footer">
+          <div class="prod-price">$145</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── BANNER ─── -->
+<div class="banner-section reveal" id="sale">
+  <div class="banner">
+    <div class="banner-inner">
+      <span class="section-tag">✦ Limited Offer</span>
+      <h2>First Order <span style="color:var(--primary)">20% OFF!</span></h2>
+      <p>Join the Urban Flow community and get exclusive access to new drops, special discounts, and early bird sales.</p>
+      <button class="btn-primary" style="font-size:0.85rem; padding:16px 34px;">✦ Sign Up Now</button>
+    </div>
+    <div class="banner-img">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80" alt="Fashion Model">
+    </div>
+  </div>
+</div>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials-section reveal" id="about">
+  <div class="section-header">
+    <span class="section-tag">✦ Reviews</span>
+    <h2 class="section-title">What They <em style="color:var(--primary)">Say</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The quality is insane! My hoodie became my go-to piece. Shipping was super fast too. Definitely ordering again!</p>
+      <div class="testi-user">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Customer">
+        </div>
+        <div>
+          <div class="testi-name">Alex M.</div>
+          <div class="testi-loc">New York, USA</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Finally found a streetwear brand that gets it. The fit is perfect and the designs are fire. Highly recommend!</p>
+      <div class="testi-user">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80" alt="Customer">
+        </div>
+        <div>
+          <div class="testi-name">Jordan K.</div>
+          <div class="testi-loc">London, UK</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★☆</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Love the aesthetic and quality. The cargo pants are so comfortable. Website is easy to navigate too.</p>
+      <div class="testi-user">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Customer">
+        </div>
+        <div>
+          <div class="testi-name">Sarah T.</div>
+          <div class="testi-loc">Toronto, Canada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">Urban<span>Flow</span></div>
+    <p>Your destination for premium streetwear. Authentic styles, quality materials, worldwide shipping.</p>
+    <div class="social-links" style="margin-top:28px">
+      <div class="social-btn">📘</div>
+      <div class="social-btn">📸</div>
+      <div class="social-btn">🐦</div>
+      <div class="social-btn">▶️</div>
+      <div class="social-btn">🎵</div>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Shop</h4>
+    <ul>
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Best Sellers</a></li>
+      <li><a href="#">Sale</a></li>
+      <li><a href="#">All Products</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Help</h4>
+    <ul>
+      <li><a href="#">Order Tracking</a></li>
+      <li><a href="#">Returns</a></li>
+      <li><a href="#">Shipping Info</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Urban Flow. All rights reserved.</span>
+  <span>💳 Visa · Mastercard · PayPal · Apple Pay</span>
+</div>
+
+<script>
+  // ─── Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) *.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('button, a, .cat-card, .prod-card, .testi-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1.8)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
+      ring.style.borderColor = 'var(--primary)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.borderColor = 'var(--primary)';
+    });
+  });
+
+  // ─── 3D tilt on product cards
+  document.querySelectorAll('.prod-card, .cat-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `
+        translateY(-12px)
+        rotateX(${-y*8}deg)
+        rotateY(${x*8}deg)
+      `;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // ─── Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+
+  // Add to cart functionality
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.textContent = '✓';
+      this.style.background = 'var(--primary)';
+      this.style.color = 'var(--white)';
+      setTimeout(() => {
+        this.textContent = '+';
+        this.style.background = '';
+        this.style.color = '';
+      }, 1500);
+      
+      // Update cart count
+      const cartBtn = document.querySelector('.nav-cart');
+      const match = cartBtn.textContent.match(/\((\d+)\)/);
+      if (match) {
+        const count = parseInt(match[1]) + 1;
+        cartBtn.textContent = `🛒 Cart (${count})`;
+      }
+    });
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
